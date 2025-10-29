@@ -1,7 +1,7 @@
 # COURS DE SCIENCE DES DONNÉES
 ## École Nationale de Commerce et de Gestion (ENCG) - 4ème Année
 
-<img src="Photo Elisee_DS.jpg" style="height:1358px;margin-right:1080px"/>
+<img src="Photo Elisee_DS.jpg" style="height:1558px;margin-right:1080px"/>
 
 ## Ilboudo Wendkouni Elisee (CAC 2)
 
