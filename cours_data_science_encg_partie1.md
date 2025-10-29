@@ -2,6 +2,8 @@
 ## École Nationale de Commerce et de Gestion (ENCG) - 4ème Année
 
 ## Ilboudo Wendkouni Elisee (CAC 2)
+
+<img src="Photo Elisee_DS.jpg" style="height:464px;margin-right:432px"/>
 ---
 
 # PARTIE 1 : FONDAMENTAUX DE LA SCIENCE DES DONNÉES
