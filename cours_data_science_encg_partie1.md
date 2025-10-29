@@ -3,7 +3,7 @@
 
 ## Ilboudo Wendkouni Elisee (CAC 2)
 
-<img src="Photo Elisee_DS.jpg" style="height:464px;margin-right:432px"/>
+<img src="Photo Elisee_DS.jpg" style="height:1459px;margin-right:1080px"/>
 ---
 
 # PARTIE 1 : FONDAMENTAUX DE LA SCIENCE DES DONNÉES
