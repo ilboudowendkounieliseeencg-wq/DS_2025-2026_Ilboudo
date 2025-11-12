@@ -69,18 +69,40 @@ Output variable (based on sensory data):
    12 - quality (score between 0 and 10)
 
 Code Python
-from ucimlrepo import fetch_ucirepo 
-  
+
+from ucimlrepo import fetch_ucirepo
 # fetch dataset 
-wine_quality = fetch_ucirepo(id=186) 
-  
+wine_quality = fetch_ucirepo(id=186)  
 # data (as pandas dataframes) 
 X = wine_quality.data.features 
-y = wine_quality.data.targets 
-  
+y = wine_quality.data.targets  
 # metadata 
-print(wine_quality.metadata) 
-  
+print(wine_quality.metadata)
 # variable information 
 print(wine_quality.variables) 
 
+Description du dataset et des auteurs qui l'ont constitué.
+Ces chercheurs (Paulo Cortez, A. Cerdeira, F. Almeida, T. Matos, J. Reis) sont des universitaires portugais qui ont collaboré sur une étude publiée en 2009 visant à modéliser la qualité du vin "Vinho Verde" à partir de propriétés physico-chimiques des échantillons de vin.
+
+Qui sont ces chercheurs ?
+Paulo Cortez : Professeur à l'Université du Minho, spécialisé en informatique, intelligence artificielle et data mining.
+A. Cerdeira, F. Almeida, T. Matos, J. Reis : Collaborateurs scientifiques affiliés à des instituts portugais, impliqués dans la recherche scientifique autour du vin et des sciences de l'information.
+
+But de l'étude et du dataset
+L'objectif principal était de prédire la qualité du vin (score sur 0-10) en utilisant des tests physico-chimiques sur des échantillons de vins rouges et blancs Vinho Verde.
+Il s'agissait de modéliser les préférences des consommateurs à l'aide de méthodes de data mining appliquées à ces variables.
+
+Population étudiée
+Les deux datasets comportent au total 4898 échantillons de vins du nord du Portugal (Vinho Verde).
+Chaque échantillon correspond à un vin blanc ou rouge, analysés selon 11 variables physico-chimiques.
+
+Objectifs atteints
+Les chercheurs ont démontré qu'il était possible de prédire la qualité sensorielle du vin à partir de ses propriétés chimiques grâce à des techniques de classification et de régression.
+Leur travail a permis d’identifier les facteurs chimiques influençant le plus la qualité perçue.
+
+Démarche de collecte des données
+La collecte concerne des échantillons de vins analysés en laboratoire pour mesurer 11 variables physico-chimiques (acidité, sucre, sulfites, alcool, etc.).
+Ensuite, ces vins ont été évalués par des panels sensoriels pour leur attribuer un score de qualité.
+Pour des raisons non mentionnées, aucune donnée sur la marque, le cépage ni le prix n’a été collectée.
+
+Ces informations fondamentales sont détaillées dans l’article "Modeling wine preferences by data mining from physicochemical properties" publié en 2009 dans la revue Decision Support Systems.
