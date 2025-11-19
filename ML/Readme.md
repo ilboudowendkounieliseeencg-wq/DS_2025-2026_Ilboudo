@@ -1,5 +1,5 @@
 
-<img src="photo_Elisee_DS.jpg" style="height:200px;margin-right:100px"/>
+<img src="photo_Elisee_DS.jpg" style="height:400px;margin-right:250px"/>
 
 ## Ilboudo Wendkouni Elisee CAC 2
 
