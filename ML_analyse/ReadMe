@@ -1,1 +1,8 @@
 
+
+
+# Introduction 
+
+In order to get valuable insights into the factors affecting students  academic performance, this notebook describes an Exploratory Data Analysis (EDA) of the Student Performance Factors dataset. Finding important connections between several elements including study habits, parental participation, socioeconomic circumstances, and overall exam achievement is the main objective.
+
+The purpose of this project is to identify trends that can help academics, educators, and policy makers better understand and enhance learning effectiveness through correlation analysis, statistical summaries, and visulizations. In order to proceed with more modeling and performance optimization, the EDA process offers a fundamental understanding of the dataset structure, trends, and possible predictors of student success.
