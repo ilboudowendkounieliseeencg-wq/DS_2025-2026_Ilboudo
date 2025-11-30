@@ -1,5 +1,107 @@
-# Introduction 
+# Compte Rendu Détaillé : Analyse des Tendances de Performance des Étudiants
+**Nom :** Ilboudo Wendkouni Elisee
 
-In order to get valuable insights into the factors affecting students  academic performance, this notebook describes an Exploratory Data Analysis (EDA) of the Student Performance Factors dataset. Finding important connections between several elements including study habits, parental participation, socioeconomic circumstances, and overall exam achievement is the main objective.
+## Sommaire
+1.  **Introduction**
+2.  **Exploration des Données**
+3.  **Prétraitement des Données**
+4.  **Modélisation Prédictive**
+    * Régression Logistique
+    * Machine à Vecteurs de Support (SVC)
+    * Arbre de Décision
+    * XGBoost
+    * Gradient Boosting
+5.  **Comparaison des Modèles**
+6.  **Conclusion et Recommandations**
 
-The purpose of this project is to identify trends that can help academics, educators, and policy makers better understand and enhance learning effectiveness through correlation analysis, statistical summaries, and visulizations. In order to proceed with more modeling and performance optimization, the EDA process offers a fundamental understanding of the dataset structure, trends, and possible predictors of student success.
+---
+
+## 1. Introduction
+Ce document présente une analyse approfondie d'un jeu de données relatif aux facteurs influençant la performance des étudiants ("Student Performance Factors"). L'objectif principal est de comprendre les déterminants de la réussite scolaire et de construire des modèles prédictifs capables de classer les étudiants selon leur probabilité de réussir ou d'échouer à un examen.
+
+## 2. Exploration des Données
+L'analyse débute par le chargement et l'examen du jeu de données `StudentPerformanceFactors.csv`.
+* **Taille du jeu de données :** Il contient 6607 entrées et 20 colonnes.
+* **Variables :** Le jeu de données inclut des variables numériques (ex: `Hours_Studied`, `Attendance`, `Exam_Score`) et catégorielles (ex: `Parental_Involvement`, `Access_to_Resources`).
+* **Statistiques descriptives :**
+    * Le score moyen à l'examen (`Exam_Score`) est d'environ 67.24, avec un minimum de 55 et un maximum de 101.
+    * Le nombre moyen d'heures d'étude est de 19.98.
+    * Le taux de présence moyen est de 79.98%.
+* **Données manquantes :** Certaines colonnes comme `Teacher_Quality`, `Parental_Education_Level` et `Distance_from_Home` présentent des valeurs manquantes.
+
+## 3. Prétraitement des Données
+Pour préparer les données à la modélisation, plusieurs étapes de prétraitement ont été réalisées :
+* **Encodage des variables catégorielles :** Utilisation de `LabelEncoder` pour transformer les variables textuelles en valeurs numériques (ex: `Gender`, `Peer_Influence`).
+* **Traitement des valeurs manquantes :** Les valeurs manquantes dans les colonnes catégorielles ont été imputées en utilisant le mode (la valeur la plus fréquente) de chaque colonne.
+* **Encodage One-Hot :** Les variables catégorielles ont ensuite été transformées en variables indicatrices (one-hot encoding), portant le nombre total de caractéristiques (features) à 26.
+* **Création de la variable cible :** Une variable binaire `y_binary` a été créée pour la classification :
+    * **Pass (1) :** `Exam_Score` $\ge$ 65
+    * **Fail (0) :** `Exam_Score` < 65
+    * Cette transformation a résulté en 5155 étudiants ayant réussi et 1452 ayant échoué.
+* **Division des données :** Les données ont été séparées en ensembles d'entraînement (80%, soit 5285 échantillons) et de test (20%, soit 1322 échantillons).
+
+## 4. Modélisation Prédictive
+Plusieurs algorithmes de classification ont été entraînés et évalués pour prédire la réussite des étudiants.
+
+### Régression Logistique
+* **Performance :** Ce modèle a montré une excellente performance avec une précision globale (accuracy) d'environ 96% sur l'ensemble de test.
+* **Métriques clés :**
+    * Précision (Precision) pour la classe 'Pass' : 96.10%.
+    * Rappel (Recall) pour la classe 'Pass' : 98.95%.
+    * F1-score : 97.51%.
+* **Matrice de confusion :** Le modèle a correctement identifié 1036 réussites (Vrais Positifs) et 233 échecs (Vrais Négatifs). Il a commis peu d'erreurs, avec seulement 42 Faux Positifs et 11 Faux Négatifs.
+* **Interprétation :** Le modèle est très efficace pour identifier les étudiants qui réussiront (rappel élevé), ce qui est utile pour des stratégies d'intervention précoce.
+
+### Machine à Vecteurs de Support (SVC)
+* **Performance :** Le modèle SVC a surpassé tous les autres modèles évalués.
+* **Métriques clés :**
+    * Précision globale : 98.64%.
+    * Précision 'Pass' : 99.05%.
+    * Rappel 'Pass' : 99.24%.
+    * F1-score : 99.14%.
+* **Matrice de confusion :** Seulement 10 Faux Positifs et 8 Faux Négatifs sur 1322 échantillons.
+* **Caractéristiques :** Le SVC est robuste pour trouver des marges claires et gérer la non-linéarité, bien qu'il soit moins directement interprétable que d'autres modèles.
+
+### Arbre de Décision
+* **Performance :** L'arbre de décision a obtenu une précision globale d'environ 87.22%.
+* **Métriques clés :**
+    * Précision 'Pass' : 92.54%.
+    * Rappel 'Pass' : 91.21%.
+    * F1-score : 91.87%.
+* **Avantages :** Ce modèle offre une grande interprétabilité et gère bien les relations non-linéaires ainsi que les types de données mixtes.
+
+### XGBoost
+* **Performance :** Le modèle XGBoost a démontré une forte capacité prédictive avec une précision globale de 94.93%.
+* **Métriques clés :**
+    * Précision 'Pass' : 96.05%.
+    * Rappel 'Pass' : 97.61%.
+    * F1-score : 96.83%.
+* **Matrice de confusion :** 1022 Vrais Positifs, 233 Vrais Négatifs, 42 Faux Positifs et 25 Faux Négatifs.
+* **Caractéristiques :** Il est robuste au surajustement grâce à la régularisation et gère bien les interactions complexes entre les variables.
+
+### Gradient Boosting
+* **Performance :** Ce modèle a atteint une précision globale de 93.34% sur l'ensemble de test.
+* **Métriques clés :**
+    * Précision 'Pass' : 94.36%.
+    * Rappel 'Pass' : 97.42%.
+    * F1-score : 95.86%.
+* **Validation croisée :** Une validation croisée a confirmé la robustesse du modèle avec une précision moyenne de 93.26% et un très faible écart-type (0.0027), indiquant une performance stable et généralisable.
+
+### Naive Bayes Multinomial
+* **Performance :** Ce modèle a servi de référence (baseline) avec une précision globale de 81.85%.
+* **Métriques clés :**
+    * Précision 'Pass' : 84.94%.
+    * Rappel 'Pass' : 93.70%.
+    * F1-score : 89.10%.
+* **Limites :** Bien qu'efficace pour capturer les étudiants réussissant (rappel élevé), sa précision est inférieure aux autres modèles, générant plus de faux positifs.
+
+## 5. Comparaison des Modèles
+* **Meilleur Modèle :** Le **SVC (Support Vector Classifier)** est le modèle le plus performant sur toutes les métriques (Précision, Rappel, F1-Score), affichant une fiabilité exceptionnelle avec un taux d'erreur très faible.
+* **Alternative Robuste :** Le modèle **XGBoost** offre également d'excellentes performances et peut être préféré si l'interprétabilité des caractéristiques (feature importance) est une priorité par rapport à une légère baisse de précision.
+* **Comparaison SVC vs XGBoost :** Le SVC a montré moins de mauvaises classifications (18 erreurs totales contre 67 pour XGBoost), ce qui en fait le candidat idéal pour des applications critiques où la précision est primordiale.
+
+## 6. Conclusion et Recommandations
+L'analyse a permis de développer plusieurs modèles performants pour prédire la réussite des étudiants.
+* Le modèle **SVC** est recommandé pour le déploiement final en raison de sa précision supérieure (98.64%) et de sa capacité à minimiser à la fois les faux positifs et les faux négatifs.
+* Le modèle **XGBoost** reste une option solide, particulièrement utile pour comprendre quels facteurs (ex: heures d'étude, assiduité) influencent le plus les résultats.
+* Ces modèles peuvent servir d'outils fiables pour identifier les étudiants à risque et mettre en place des mesures de soutien pédagogique ciblées.
