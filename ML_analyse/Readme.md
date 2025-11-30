@@ -2,7 +2,7 @@
 <img src="photo_Elisee_DS.jpg" style="height:400px;margin-right:250px"/>
 
 ## Ilboudo Wendkouni Elisee CAC 2
-## Compte Rendu Détaillé : Analyse des Tendances de Performance des Étudiants (ML)
+## Compte rendu détaillé : Analyse des tendances de performance des Étudiants (ML)
 
 ## Sommaire
 1.  **Introduction**
