@@ -1,4 +1,8 @@
+<img src="photo_Elisee_DS.jpg" style="height:400px;margin-right:250px"/>
 
+## Ilboudo Wendkouni Elisee CAC 2
+
+## About the dataset
 
 This dataset contains 5 million synthetically generated financial transactions designed to simulate real-world behavior for fraud detection research and machine learning applications. Each transaction record includes fields such as:
 
