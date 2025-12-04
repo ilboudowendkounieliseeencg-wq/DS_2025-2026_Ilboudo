@@ -1,11 +1,10 @@
+<img src="photo_Elisee_DS.jpg" style="height:400px;margin-right:250px"/>
 
-
-
-Voici un compte rendu structuré au format Markdown, basé sur l'analyse du notebook fourni.
+## Ilboudo Wendkouni Elisee CAC 2
 
 ***
 
-# Rapport de Projet : Détection de Fraude Financière par Machine Learning
+# Compte rendu : Détection de Fraude Financière par Machine Learning
 
 ## Sommaire
 1. [Introduction](#1-introduction)
