@@ -26,11 +26,11 @@
 ### Période Temporelle
 
 **Période couverte** : 1er janvier 2023 - 1er janvier 2024 (une année complète)
-**Distribution temporelle** : Répartition hebdomadaire uniforme avec environ 100,000 transactions par semaine[^1]
+**Distribution temporelle** : Répartition hebdomadaire uniforme avec environ 100,000 transactions par semaine
 
 ### Domaine d'Application
 
-Ce dataset est conçu pour simuler des comportements financiers réalistes dans le contexte de la **détection de fraude bancaire et financière**. Il est particulièrement adapté pour :[^1]
+Ce dataset est conçu pour simuler des comportements financiers réalistes dans le contexte de la **détection de fraude bancaire et financière**. Il est particulièrement adapté pour :
 
 - **Classification binaire** : Distinction fraude vs transaction légitime
 - **Classification multiclasse** : Identification des types de fraudes spécifiques
@@ -41,7 +41,7 @@ Ce dataset est conçu pour simuler des comportements financiers réalistes dans 
 
 ### Objectif Principal
 
-Fournir un environnement d'entraînement réaliste pour développer, tester et valider des systèmes de machine learning capables d'identifier automatiquement les transactions frauduleuses en temps réel, tout en simulant les défis réels du déséquilibre des classes et des patterns comportementaux complexes.[^2][^1]
+Fournir un environnement d'entraînement réaliste pour développer, tester et valider des systèmes de machine learning capables d'identifier automatiquement les transactions frauduleuses en temps réel, tout en simulant les défis réels du déséquilibre des classes et des patterns comportementaux complexes.
 
 ***
 
@@ -58,7 +58,7 @@ Fournir un environnement d'entraînement réaliste pour développer, tester et v
 
 ### Distribution Temporelle des Transactions
 
-Le dataset présente une distribution temporelle remarquablement **uniforme** sur l'année 2023 :[^1]
+Le dataset présente une distribution temporelle remarquablement **uniforme** sur l'année 2023 :
 
 - **Moyenne par semaine** : ~100,000 transactions
 - **Plage** : 92,999 (dernière semaine de décembre) à 100,874 transactions
@@ -75,7 +75,7 @@ Cette uniformité facilite l'entraînement des modèles en évitant les biais te
 | **Transactions frauduleuses (is_fraud = true)** | 179,553 | 3.6% | - |
 | **Ratio de déséquilibre** | - | - | **1:27** |
 
-**Analyse du déséquilibre** : Le ratio de 1:27 (1 fraude pour 27 transactions légitimes) est **modérément déséquilibré**. C'est moins extrême que certains datasets réels de fraude bancaire (souvent 1:100 ou pire) mais suffisamment déséquilibré pour nécessiter des techniques spécialisées comme SMOTE, class weighting ou threshold tuning.[^3][^4][^5][^6][^2]
+**Analyse du déséquilibre** : Le ratio de 1:27 (1 fraude pour 27 transactions légitimes) est **modérément déséquilibré**. C'est moins extrême que certains datasets réels de fraude bancaire (souvent 1:100 ou pire) mais suffisamment déséquilibré pour nécessiter des techniques spécialisées comme SMOTE, class weighting ou threshold tuning.
 
 ### Identifiants Uniques
 
@@ -87,11 +87,11 @@ Cette uniformité facilite l'entraînement des modèles en évitant les biais te
 
 ### Valeurs Manquantes
 
-Le dataset contient des valeurs manquantes **uniquement pour une colonne** :[^7][^1]
+Le dataset contient des valeurs manquantes **uniquement pour une colonne** :
 
 - **time_since_last_transaction** : Environ 17.9% de valeurs NULL (896,513 transactions)
     - **Explication** : Les valeurs NULL représentent probablement la **première transaction** d'un compte (pas de transaction précédente pour calculer l'intervalle)
-    - **Traitement recommandé** : Imputation par 0, par la médiane, ou création d'une variable binaire "is_first_transaction"[^7]
+    - **Traitement recommandé** : Imputation par 0, par la médiane, ou création d'une variable binaire "is_first_transaction"
 
 **Toutes les autres colonnes** (17/18) sont **complètes sans valeurs manquantes**.
 
@@ -143,7 +143,7 @@ Le dataset contient des valeurs manquantes **uniquement pour une colonne** :[^7]
 - **Valeurs possibles** : Identifiants alphanumériques de comptes clients
 - **Cardinalité** : 896,639 comptes uniques
 - **Valeurs manquantes** : Aucune (0%)
-- **Importance pour la détection de fraude** : **Haute** - Permet d'identifier les "money mules" et comptes de sortie utilisés par les réseaux de fraude[^8]
+- **Importance pour la détection de fraude** : **Haute** - Permet d'identifier les "money mules" et comptes de sortie utilisés par les réseaux de fraude.
 - **Exemples de valeurs** : "ACC_3456789", "USR_2345678"
 
 
@@ -220,13 +220,13 @@ Le dataset contient des valeurs manquantes **uniquement pour une colonne** :[^7]
 - **Cardinalité** : 4 valeurs uniques
 - **Distribution** : Non spécifiée (probablement équilibrée)
 - **Valeurs manquantes** : Aucune (0%)
-- **Importance pour la détection de fraude** : **Moyenne à Haute** - Les changements soudains d'appareil ou l'utilisation d'appareils inhabituels peuvent signaler un account takeover[^9][^10][^11]
+- **Importance pour la détection de fraude** : **Moyenne à Haute** - Les changements soudains d'appareil ou l'utilisation d'appareils inhabituels peuvent signaler un account takeover.
 - **Exemples de valeurs** : "mobile", "web"
 
 
 #### **payment_channel**
 
-- **Type de données** : String (catégorielle) - **[Mentionné dans la description mais non visible dans les colonnes listées]**[^7][^1]
+- **Type de données** : String (catégorielle) - **[Mentionné dans la description mais non visible dans les colonnes listées]**
 - **Description** : Canal ou méthode de paiement utilisé
 - **Valeurs possibles** : Online, offline, P2P, etc. (supposé)
 - **Cardinalité** : Non spécifiée
