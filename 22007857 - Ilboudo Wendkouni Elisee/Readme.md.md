@@ -1,6 +1,6 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
 
-# Documentation Complète du Dataset : Financial Transactions Dataset for Fraud Detection
+
+# Descriptif: Financial Transactions Dataset for Fraud Detection
 
 ## 1. VUE D'ENSEMBLE DU DATASET
 
