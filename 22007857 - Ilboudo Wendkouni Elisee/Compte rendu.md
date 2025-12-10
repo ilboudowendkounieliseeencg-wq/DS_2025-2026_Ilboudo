@@ -39,12 +39,6 @@ Les données brutes ont subi un nettoyage strict. Les valeurs manquantes ont ét
 
 ### 4.2. Gestion du Déséquilibre (SMOTE)
 # Application de SMOTE sur le train uniquement
-
-smote = SMOTE(random_state=42, k_neighbors=5)
-X_train_resampled, y_train_resampled = smote.fit_resample(X_train_scaled, y_train)
-
-print(f"Après SMOTE :")
-print(f"  Distribution : {Counter(y_train_resampled)}")
 # Résultat : Équilibre parfait 50/50 sur le train set (3 856 358 échantillons par classe)
 Pour contrer le faible taux de fraude, nous avons utilisé la technique **SMOTE** (Synthetic Minority Over-sampling Technique).
 **Point critique de méthodologie :** Le rééquilibrage a été appliqué **uniquement sur le jeu d'entraînement** pour éviter toute fuite de données (data leakage) vers le jeu de test, garantissant ainsi une évaluation honnête des performances.
