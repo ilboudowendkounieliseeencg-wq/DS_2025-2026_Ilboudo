@@ -154,7 +154,7 @@ Le dataset contient des valeurs manquantes **uniquement pour une colonne** :
 - **Type de données** : Float (nombre décimal)
 - **Description** : Montant monétaire de la transaction en dollars américains (USD)
 - **Valeurs possibles** : 0.01 USD à 3,520.57 USD
-- **Distribution** : **Fortement asymétrique à droite** (right-skewed) avec 40.7% des transactions < 70.42 USD[^1]
+- **Distribution** : **Fortement asymétrique à droite** (right-skewed) avec 40.7% des transactions < 70.42 USD
 - **Cardinalité** : Très élevée (valeurs continues)
 - **Valeurs manquantes** : Aucune (0%)
 - **Importance pour la détection de fraude** : **Haute** - Les montants inhabituellement élevés ou les petites transactions de test sont des signaux de fraude
@@ -178,7 +178,7 @@ Le dataset contient des valeurs manquantes **uniquement pour une colonne** :
     - `transfer` : Transfert entre comptes
     - `payment` : Paiement à un marchand ou service
 - **Cardinalité** : 4 valeurs uniques
-- **Distribution** : Approximativement équilibrée (~25% chacune, soit ~1.25M transactions par type)[^7]
+- **Distribution** : Approximativement équilibrée (~25% chacune, soit ~1.25M transactions par type)
 - **Valeurs manquantes** : Aucune (0%)
 - **Importance pour la détection de fraude** : **Moyenne** - Certains types (transfers, withdrawals) sont plus souvent associés à la fraude que d'autres
 - **Exemples de valeurs** : "transfer", "payment"
@@ -237,7 +237,7 @@ Le dataset contient des valeurs manquantes **uniquement pour une colonne** :
 
 #### **ip_address**
 
-- **Type de données** : String (adresse IP) - **[Mentionné mais non visible]**[^1]
+- **Type de données** : String (adresse IP) - **[Mentionné mais non visible]**
 - **Description** : Adresse IP de l'appareil ayant initié la transaction
 - **Valeurs possibles** : Adresses IPv4 ou IPv6
 - **Cardinalité** : Très élevée
@@ -248,18 +248,18 @@ Le dataset contient des valeurs manquantes **uniquement pour une colonne** :
 
 #### **device_hash**
 
-- **Type de données** : String (hash cryptographique) - **[Mentionné mais non visible]**[^1]
+- **Type de données** : String (hash cryptographique) - **[Mentionné mais non visible]**
 - **Description** : Empreinte unique de l'appareil basée sur ses caractéristiques (fingerprinting)
 - **Valeurs possibles** : Hash MD5, SHA-256 ou similaire
 - **Cardinalité** : Très élevée
 - **Valeurs manquantes** : Non spécifié
-- **Importance pour la détection de fraude** : **Haute** - Permet de suivre les appareils à travers les comptes et d'identifier les réseaux de fraude utilisant les mêmes appareils[^9]
+- **Importance pour la détection de fraude** : **Haute** - Permet de suivre les appareils à travers les comptes et d'identifier les réseaux de fraude utilisant les mêmes appareils
 - **Exemples de valeurs** : "a3f7b89c4d5e6f1a2b3c4d5e6f7a8b9c"
 
 
 ### 3.5 Features Comportementales et Scores d'Anomalie
 
-Ces features sont des **variables dérivées** calculées à partir de l'historique transactionnel pour capturer les comportements anormaux.[^12][^13][^7][^1]
+Ces features sont des **variables dérivées** calculées à partir de l'historique transactionnel pour capturer les comportements anormaux.
 
 #### **time_since_last_transaction**
 
@@ -267,8 +267,8 @@ Ces features sont des **variables dérivées** calculées à partir de l'histori
 - **Description** : Intervalle de temps écoulé depuis la dernière transaction du même compte émetteur, mesurant la **vélocité transactionnelle**
 - **Valeurs possibles** : 0 à plusieurs millions de secondes (ou valeurs normalisées 0-1)
 - **Cardinalité** : Très élevée (valeurs continues)
-- **Valeurs manquantes** : **Oui, 17.9%** (896,513 transactions) - représente probablement les premières transactions des comptes[^7]
-- **Importance pour la détection de fraude** : **Haute** - Les rafales de transactions (faible intervalle) sont un signal fort de fraude, tout comme les transactions après de longues périodes d'inactivité[^14][^7]
+- **Valeurs manquantes** : **Oui, 17.9%** (896,513 transactions) - représente probablement les premières transactions des comptes.
+- **Importance pour la détection de fraude** : **Haute** - Les rafales de transactions (faible intervalle) sont un signal fort de fraude, tout comme les transactions après de longues périodes d'inactivité.
 - **Exemples de valeurs** : 3600.0 (1 heure), 86400.0 (24 heures), NULL (première transaction)
 
 
@@ -279,7 +279,7 @@ Ces features sont des **variables dérivées** calculées à partir de l'histori
 - **Valeurs possibles** : Généralement -3 à +3 (score Z standardisé) ou 0 à 1 (normalisé)
 - **Cardinalité** : Très élevée (valeurs continues)
 - **Valeurs manquantes** : Aucune (0%)
-- **Importance pour la détection de fraude** : **Très Haute** - Un score élevé indique une dépense inhabituelle, souvent associée à la fraude[^15][^14][^7][^1]
+- **Importance pour la détection de fraude** : **Très Haute** - Un score élevé indique une dépense inhabituelle, souvent associée à la fraude.
 - **Calcul** : $\text{Score} = \frac{\text{amount} - \mu_{\text{historique}}}{\sigma_{\text{historique}}}$
 - **Exemples de valeurs** : 0.5 (normal), 2.8 (très déviant = suspect), -1.2 (en dessous de la normale)
 
@@ -291,7 +291,7 @@ Ces features sont des **variables dérivées** calculées à partir de l'histori
 - **Valeurs possibles** : 0 à plusieurs centaines (selon la normalisation)
 - **Cardinalité** : Élevée
 - **Valeurs manquantes** : Aucune (0%)
-- **Importance pour la détection de fraude** : **Très Haute** - Les scores de vélocité élevés sont un des signaux les plus forts de fraude, indiquant des attaques automatisées ou des tentatives de vidage de compte[^14][^15][^7][^1]
+- **Importance pour la détection de fraude** : **Très Haute** - Les scores de vélocité élevés sont un des signaux les plus forts de fraude, indiquant des attaques automatisées ou des tentatives de vidage de compte.
 - **Exemples de valeurs** : 1 (activité faible), 15 (activité normale), 87 (vélocité anormalement élevée = suspect)
 
 
@@ -302,7 +302,7 @@ Ces features sont des **variables dérivées** calculées à partir de l'histori
 - **Valeurs possibles** : 0 (normal) à 1 (très anormal) ou échelle similaire
 - **Cardinalité** : Élevée
 - **Valeurs manquantes** : Aucune (0%)
-- **Importance pour la détection de fraude** : **Haute** - Un score élevé indique une transaction depuis une localisation jamais vue ou géographiquement impossible (ex: deux pays différents en 1 heure)[^15][^14][^1]
+- **Importance pour la détection de fraude** : **Haute** - Un score élevé indique une transaction depuis une localisation jamais vue ou géographiquement impossible (ex: deux pays différents en 1 heure).
 - **Exemples de valeurs** : 0.1 (lieu habituel), 0.9 (lieu très inhabituel = suspect), 0.5 (nouveau lieu mais plausible)
 
 
@@ -319,18 +319,18 @@ Ces features sont des **variables dérivées** calculées à partir de l'histori
 - **Distribution** :
     - `false` : 4,820,447 (96.4%)
     - `true` : 179,553 (3.6%)
-- **Valeurs manquantes** : **Aucune (0%)** - Toutes les transactions sont labellisées[^1]
+- **Valeurs manquantes** : **Aucune (0%)** - Toutes les transactions sont labellisées.
 - **Importance pour la détection de fraude** : **Critique** - C'est la variable à prédire
 - **Exemples de valeurs** : `false`, `true`
 
 
 #### **fraud_type**
 
-- **Type de données** : String (catégorielle) - **[Mentionné mais détails limités]**[^1]
+- **Type de données** : String (catégorielle) - **[Mentionné mais détails limités]**.
 - **Description** : Type spécifique de fraude détecté pour les transactions frauduleuses
 - **Valeurs possibles** :
     - `money_laundering` : Blanchiment d'argent
-    - `account_takeover` : Prise de contrôle de compte[^16][^10][^17][^11][^9]
+    - `account_takeover` : Prise de contrôle de compte.
     - Autres types possibles : identity theft, card testing, etc.
 - **Cardinalité** : Non spécifiée (probablement 3-6 types)
 - **Valeurs manquantes** : Non spécifié (probablement NULL pour les transactions légitimes)
@@ -347,7 +347,7 @@ Ces features sont des **variables dérivées** calculées à partir de l'histori
 
 | Statistique | Valeur (USD) |
 | :-- | :-- |
-| **Moyenne** | ~\$585.42 (estimation basée sur la distribution)[^1] |
+| **Moyenne** | ~\$585.42 (estimation basée sur la distribution).
 | **Écart-type** | ~\$580-650 (estimation) |
 | **Minimum** | \$0.01 |
 | **25e percentile (Q1)** | ~\$120 |
@@ -385,7 +385,7 @@ Ces scores sont des **variables normalisées** dont les statistiques exactes doi
 
 #### Transaction Type (transaction_type)
 
-Basé sur les informations disponibles, voici la distribution estimée :[^7]
+Basé sur les informations disponibles, voici la distribution estimée :
 
 
 | Type | Nombre (estimation) | Pourcentage |
@@ -434,7 +434,7 @@ Basé sur les informations disponibles, voici la distribution estimée :[^7]
 
 **Taux de fraude** : **3.59%** (approximativement 1 transaction sur 28)
 
-**Contexte industriel** : Ce taux est **légèrement plus élevé** que la moyenne réelle dans l'industrie bancaire (typiquement 0.1-2%), mais reste dans une plage réaliste pour certains segments à plus haut risque (paiements en ligne, e-commerce international).[^18][^2][^1]
+**Contexte industriel** : Ce taux est **légèrement plus élevé** que la moyenne réelle dans l'industrie bancaire (typiquement 0.1-2%), mais reste dans une plage réaliste pour certains segments à plus haut risque (paiements en ligne, e-commerce international).
 
 ### 5.3 Ratio de Déséquilibre (Imbalance Ratio)
 
@@ -449,9 +449,7 @@ Basé sur les informations disponibles, voici la distribution estimée :[^7]
 - **Élevé** : 1:50 à 1:100
 - **Extrême** : > 1:100
 
-**Implication ML** : Ce niveau de déséquilibre nécessite des techniques spécialisées pour éviter que le modèle n'ignore la classe minoritaire :[^4][^5][^6][^2][^3]
-
-- **SMOTE** (Synthetic Minority Over-sampling Technique)
+**Implication ML** : Ce niveau de déséquilibre nécessite des techniques spécialisées pour éviter que le modèle n'ignore la classe minoritaire :
 - **Class weighting** dans les algorithmes
 - **Threshold tuning** pour privilégier le recall
 - **Ensemble methods** (Random Forest, XGBoost avec scale_pos_weight)
@@ -459,16 +457,16 @@ Basé sur les informations disponibles, voici la distribution estimée :[^7]
 
 ### 5.4 Types de Fraudes Présentes
 
-Le dataset mentionne une colonne **fraud_type** permettant la classification multiclasse. Les types principaux incluent :[^1]
+Le dataset mentionne une colonne **fraud_type** permettant la classification multiclasse. Les types principaux incluent :
 
 1. **Money Laundering (Blanchiment d'argent)**
     - Transferts multiples en cascade pour obscurcir l'origine des fonds
     - Montants fragmentés (smurfing)
-    - Utilisation de comptes mules[^8]
+    - Utilisation de comptes mules.
 2. **Account Takeover (Prise de contrôle de compte)**
     - Accès non autorisé via phishing, credential stuffing ou ingénierie sociale
     - Changements soudains de device, localisation ou comportement
-    - Transactions de vidage de compte[^10][^17][^11][^16][^9]
+    - Transactions de vidage de compte.
 3. **Autres types possibles** (non confirmés dans la documentation) :
     - Identity theft (vol d'identité)
     - Card testing (tests de cartes volées)
@@ -488,7 +486,7 @@ Le dataset mentionne une colonne **fraud_type** permettant la classification mul
 
 ## 6. FEATURES AVANCÉES ET COMPORTEMENTALES
 
-Cette section détaille les **features engineered** du dataset, qui sont parmi ses atouts majeurs pour l'apprentissage machine.[^13][^19][^12][^7][^1]
+Cette section détaille les **features engineered** du dataset, qui sont parmi ses atouts majeurs pour l'apprentissage machine.
 
 ### 6.1 Features de Vélocité
 
@@ -506,7 +504,7 @@ $$
 - **Valeurs NULL** : Première transaction du compte (peut indiquer un nouveau compte frauduleux ou un compte légitime)
 - **Valeurs très élevées** : Réactivation après dormance (risque d'account takeover si suivie d'activité inhabituelle)
 
-**Stratégies d'imputation recommandées** :[^7]
+**Stratégies d'imputation recommandées** :
 
 1. **Imputation par 0** : Simple, traite les premières transactions comme une catégorie distincte
 2. **Imputation par la médiane** : Conserve la distribution
@@ -534,7 +532,7 @@ Où :
     - Attaques automatisées
     - Blanchiment d'argent via transactions rapides en cascade
 
-**Importance** : **Très Haute** - Une des features les plus discriminantes selon la littérature[^14][^15][^7]
+**Importance** : **Très Haute** - Une des features les plus discriminantes selon la littérature.
 
 ### 6.2 Features d'Anomalie de Dépenses
 
@@ -564,8 +562,7 @@ Où :
 - Détecte les **gros achats** non caractéristiques du profil client
 - Capture les changements soudains de comportement
 
-**Importance** : **Très Haute** - Feature critique dans la plupart des systèmes de détection de fraude[^19][^13][^14][^7]
-
+**Importance** : **Très Haute** - Feature critique dans la plupart des systèmes de détection de fraude.
 ### 6.3 Features d'Anomalie Géographique
 
 #### **geo_anomaly_score**
@@ -580,7 +577,7 @@ Où :
 
 - $\text{distance}$ = distance en km entre la localisation actuelle et la localisation habituelle
 - $\Delta t$ = temps écoulé depuis la dernière transaction (voyage impossible si $\Delta t$ trop court)
-- $f$ = fonction de normalisation (ex: sigmoïde) pour mapper à[^1]
+- $f$ = fonction de normalisation (ex: sigmoïde) pour mapper à
 
 **Facteurs considérés** :
 
@@ -591,11 +588,11 @@ Où :
 
 **Utilité pour la détection de fraude** :
 
-- **Détection d'account takeover** : Les fraudeurs se connectent souvent depuis des localisations différentes[^10][^9]
+- **Détection d'account takeover** : Les fraudeurs se connectent souvent depuis des localisations différentes.
 - **Impossible travel** : Deux transactions géographiquement distantes en un temps physiquement impossible
 - **Géofencing** : Transactions depuis des pays jamais visités ou blacklistés
 
-**Importance** : **Haute** - Particulièrement efficace pour détecter les account takeovers[^20][^21]
+**Importance** : **Haute** - Particulièrement efficace pour détecter les account takeovers.
 
 ### 6.4 Features de Métadonnées (Device, IP)
 
@@ -603,11 +600,11 @@ Où :
 
 **Utilité combinée** :
 
-- **Changement soudain d'appareil** : Un compte utilisant toujours mobile puis soudainement web depuis un nouvel appareil → suspect[^9]
+- **Changement soudain d'appareil** : Un compte utilisant toujours mobile puis soudainement web depuis un nouvel appareil → suspect.
 - **Device fingerprinting** : Le `device_hash` permet de suivre les appareils à travers les comptes pour identifier les réseaux de fraude
 - **IP reputation** : Les adresses IP connues pour être associées à des proxies, VPN, data centers ou pays à haut risque augmentent le risque
 
-**Pattern typique d'account takeover** :[^10][^9]
+**Pattern typique d'account takeover** :
 
 1. Victime utilise toujours iPhone depuis New York (IP résidentielle)
 2. Fraudeur se connecte depuis laptop à Lagos (IP datacenter, nouveau device_hash)
@@ -625,7 +622,7 @@ Bien que `timestamp` soit une colonne brute, des features temporelles peuvent ê
 | **is_weekend** | Samedi ou Dimanche | Activité frauduleuse accrue les week-ends |
 | **is_night** | 0h-6h du matin | Les fraudeurs opèrent souvent la nuit |
 
-**Recommandation** : Créer ces features durant le feature engineering.[^22][^12][^13]
+**Recommandation** : Créer ces features durant le feature engineering.
 
 ***
 
@@ -663,7 +660,7 @@ ORDER BY trx_count DESC;
 
 **À vérifier** :
 
-- ✅ **Plage temporelle** : 2023-01-01 à 2024-01-01 (confirmé)[^1]
+- ✅ **Plage temporelle** : 2023-01-01 à 2024-01-01 (confirmé).
 - 🔍 **Ordre séquentiel** : Les transactions doivent être dans l'ordre chronologique (si le dataset est trié par timestamp)
 - ⚠️ **Timestamps futurs** : Aucun timestamp ne devrait dépasser 2024-01-01
 - ⚠️ **Timestamps impossibles** : Vérifier l'absence de dates invalides (ex: 2023-02-30)
@@ -727,7 +724,7 @@ print(f"Transactions avec outliers extrêmes: {len(outliers)}")
 
 **Vérification** :
 
-- ✅ **Unicité garantie** : Les 5 millions de transaction_id doivent être uniques (confirmé par cardinalité)[^1]
+- ✅ **Unicité garantie** : Les 5 millions de transaction_id doivent être uniques (confirmé par cardinalité).
 
 **Code de validation** :
 
@@ -755,9 +752,9 @@ print(f"Transactions potentiellement dupliquées: {duplicates.sum()}")
 
 | Problème | Sévérité | Description | Mitigation |
 | :-- | :-- | :-- | :-- |
-| **Valeurs manquantes dans time_since_last_transaction** | ⚠️ Moyenne | 17.9% de valeurs NULL | Imputation par 0, médiane, ou feature binaire[^7] |
+| **Valeurs manquantes dans time_since_last_transaction** | ⚠️ Moyenne | 17.9% de valeurs NULL | Imputation par 0, médiane, ou feature binaire. |
 | **Nature synthétique des données** | ⚠️ Moyenne-Haute | Possibles patterns irréalistes | Validation avec experts métier, tests sur données réelles |
-| **Déséquilibre des classes** | ⚠️ Moyenne | Ratio 1:27 | SMOTE, class weighting, threshold tuning[^2][^6] |
+| **Déséquilibre des classes** | ⚠️ Moyenne | Ratio 1:27 | SMOTE, class weighting, threshold tuning. |
 | **Documentation incomplète de certaines colonnes** | ℹ️ Faible | ip_address, device_hash, payment_channel, fraud_type non détaillés | Exploration du fichier CSV complet |
 | **Distribution de certaines catégorielles inconnue** | ℹ️ Faible | merchant_category, fraud_type | Calculer avec pandas value_counts() |
 
@@ -770,7 +767,7 @@ print(f"Transactions potentiellement dupliquées: {duplicates.sum()}")
 
 #### Features Hautement Prédictives (Top 10)
 
-Basé sur la littérature et l'analyse du dataset :[^23][^24][^13][^19][^15][^14][^7]
+Basé sur la littérature et l'analyse du dataset :
 
 
 | Rang | Feature | Type | Importance Estimée | Justification |
@@ -823,7 +820,7 @@ merchant_encoded = te.fit_transform(df['merchant_category'], df['is_fraud'])
 
 | Feature | Transformation Recommandée | Justification |
 | :-- | :-- | :-- |
-| **amount** | **Log($x+1$)** ou **RobustScaler** | Distribution asymétrique avec outliers[^7] |
+| **amount** | **Log($x+1$)** ou **RobustScaler** | Distribution asymétrique avec outliers. |
 | **time_since_last_transaction** | **StandardScaler** après imputation | Distribution potentiellement log-normale |
 | **Scores d'anomalie** | **StandardScaler** ou déjà normalisés | Uniformiser les échelles |
 
@@ -927,7 +924,7 @@ df['total_anomaly_score'] = (df['spending_deviation_score'].abs() +
 
 | Technique | Avantages | Inconvénients | Quand l'utiliser |
 | :-- | :-- | :-- | :-- |
-| **SMOTE** | Augmente la classe minoritaire, améliore le recall | Peut créer des exemples irréalistes, risque d'overfitting[^6] | Dataset < 1M lignes, ratio 1:10 à 1:100 |
+| **SMOTE** | Augmente la classe minoritaire, améliore le recall | Peut créer des exemples irréalistes, risque d'overfitting. | Dataset < 1M lignes, ratio 1:10 à 1:100 |
 | **Random UnderSampling** | Réduit le temps d'entraînement | Perte d'information de la classe majoritaire | Très gros datasets (>5M lignes) |
 | **Hybrid (SMOTE + Tomek)** | Nettoie les frontières de décision | Plus complexe à implémenter | Pour maximiser la performance |
 | **Class Weighting** | Pas de modification des données | Moins efficace que SMOTE pour les grands déséquilibres | Avec XGBoost, Random Forest (paramètre scale_pos_weight) |
@@ -937,9 +934,9 @@ df['total_anomaly_score'] = (df['spending_deviation_score'].abs() +
 **Recommandation pour ce dataset (ratio 1:27)** :
 
 1. **Baseline** : Entraîner avec class weighting
-2. **SMOTE** : Appliquer SMOTE pour obtenir un ratio 1:3 à 1:5 (pas 1:1 complet)[^6]
+2. **SMOTE** : Appliquer SMOTE pour obtenir un ratio 1:3 à 1:5 (pas 1:1 complet).
 3. **Hybrid** : SMOTE + Tomek Links pour nettoyer
-4. **Comparer** les 3 approches sur validation set avec focus sur **Recall ≥ 80%**[^24][^25][^23]
+4. **Comparer** les 3 approches sur validation set avec focus sur **Recall ≥ 80%**.
 
 **Code exemple** :
 
@@ -980,7 +977,7 @@ print(f"Nouveau ratio: 1:{(y_train_smote == 0).sum() / (y_train_smote == 1).sum(
 
 **Limitations inhérentes** :
 
-- ⚠️ **Patterns simplifiés** : Les fraudes réelles sont plus complexes et évolutives que les patterns simulés[^11][^1]
+- ⚠️ **Patterns simplifiés** : Les fraudes réelles sont plus complexes et évolutives que les patterns simulés.
 - ⚠️ **Distribution artificielle** : La distribution uniforme temporelle n'est pas réaliste (vrais pics autour des fêtes, salaires)
 - ⚠️ **Nouvelles techniques de fraude** : Les fraudeurs innovent constamment, les données synthétiques ne capturent que les patterns connus
 - ⚠️ **Interactions humaines** : Comportements psychologiques et contextuels non capturés
@@ -995,11 +992,11 @@ print(f"Nouveau ratio: 1:{(y_train_smote == 0).sum() / (y_train_smote == 1).sum(
 
 | Aspect | Dataset Synthétique | Production Réelle |
 | :-- | :-- | :-- |
-| **Taux de fraude** | 3.6% (stable) | 0.1-2% (variable)[^1][^2] |
+| **Taux de fraude** | 3.6% (stable) | 0.1-2% (variable). |
 | **Déséquilibre** | 1:27 | 1:50 à 1:1000 |
 | **Labels** | 100% labellisés | 10-30% des fraudes non détectées (faux négatifs) |
-| **Latence** | Batch | Temps réel (< 100ms)[^20][^26] |
-| **Drift** | Aucun | Concept drift constant (nouveaux patterns)[^27] |
+| **Latence** | Batch | Temps réel (< 100ms). |
+| **Drift** | Aucun | Concept drift constant (nouveaux patterns). |
 | **Qualité** | Parfaite | Valeurs manquantes, erreurs de saisie, duplicatas |
 | **Volume** | 5M sur 1 an | Peut atteindre des milliards pour grandes banques |
 
@@ -1026,7 +1023,7 @@ print(f"Nouveau ratio: 1:{(y_train_smote == 0).sum() / (y_train_smote == 1).sum(
     - Skimming de cartes
     - Fraude aux distributeurs (shimming)
 5. **Fraude sociale complexe**
-    - Scams d'ingénierie sociale multi-étapes[^16]
+    - Scams d'ingénierie sociale multi-étapes.
     - Romance scams, fraude aux investissements
 
 ### 9.4 Précautions d'Interprétation
@@ -1036,8 +1033,7 @@ print(f"Nouveau ratio: 1:{(y_train_smote == 0).sum() / (y_train_smote == 1).sum(
 1. **Ne pas sur-optimiser** : Un F1-score de 99% sur ce dataset ne signifie pas 99% en production
 2. **Analyser les erreurs** : Comprendre **pourquoi** le modèle se trompe est plus important que la métrique globale
 3. **Tester la robustesse** : Évaluer sur différentes périodes temporelles et sous-segments (par device_type, location)
-4. **Considérer le coût** : En production, les **faux positifs** bloquent des clients légitimes (coût de friction)[^25][^28]
-
+4. **Considérer le coût** : En production, les **faux positifs** bloquent des clients légitimes (coût de friction).
 #### Pour les Équipes Métier
 
 1. **Point de départ, pas solution finale** : Ce dataset sert à développer un prototype, pas un système production-ready
@@ -1052,21 +1048,21 @@ print(f"Nouveau ratio: 1:{(y_train_smote == 0).sum() / (y_train_smote == 1).sum(
 1. **Prototypage rapide** : Tester différents algorithmes (Random Forest, XGBoost, Neural Networks)
 2. **Feature engineering** : Développer et valider les features avancées
 3. **Optimisation des hyperparamètres** : Grid search, Bayesian optimization
-4. **Benchmark** : Établir une baseline de performances (target: Recall > 80%, F1 > 0.75)[^23][^24]
+4. **Benchmark** : Établir une baseline de performances (target: Recall > 80%, F1 > 0.75).
 
 #### Phase 2 : Validation (données historiques réelles)
 
 1. **Collecter données réelles** : 6-12 mois de transactions historiques avec labels vérifiés
 2. **Réentraîner** : Adapter le modèle aux patterns réels
 3. **Backtesting** : Simuler les performances sur historique réel
-4. **Ajuster seuils** : Optimiser le trade-off recall/precision selon les coûts métier[^28]
+4. **Ajuster seuils** : Optimiser le trade-off recall/precision selon les coûts métier.
 
 #### Phase 3 : Déploiement (production)
 
 1. **Mode shadow** : Scorer sans bloquer pendant 1-3 mois
 2. **Analyse des alertes** : Équipe fraude valide manuellement les alertes pour ajuster
 3. **A/B testing** : Comparer avec système existant
-4. **Monitoring continu** : Surveiller data drift, performance degradation[^27]
+4. **Monitoring continu** : Surveiller data drift, performance degradation.
 5. **Réentraînement périodique** : Mensuel ou trimestriel selon le drift observé
 
 #### Seuils de Décision Recommandés (à ajuster)
@@ -1095,8 +1091,8 @@ print(f"Nouveau ratio: 1:{(y_train_smote == 0).sum() / (y_train_smote == 1).sum(
 
 | Champ | Information |
 | :-- | :-- |
-| **Date de publication** | Mai 2025[^29] |
-| **Dernière mise à jour** | Juillet 2025 (basé sur les statistiques de vues/downloads)[^1] |
+| **Date de publication** | Mai 2025 |
+| **Dernière mise à jour** | Juillet 2025 (basé sur les statistiques de vues/downloads) |
 | **Version actuelle** | Version 1 (pas de versions multiples documentées) |
 | **Période des données** | 1er janvier 2023 - 1er janvier 2024 (données synthétiques datées) |
 
@@ -1135,15 +1131,6 @@ https://www.kaggle.com/datasets/aryan208/financial-transactions-dataset-for-frau
   url = {https://www.kaggle.com/datasets/aryan208/financial-transactions-dataset-for-fraud-detection}
 }
 ```
-
-**Format IEEE** :
-
-```
-[^1] aryan208, "Financial Transactions Dataset for Fraud Detection," Kaggle Datasets, 2025. 
-[Online]. Available: https://www.kaggle.com/datasets/aryan208/financial-transactions-dataset-for-fraud-detection
-```
-
-
 ### 10.5 Statistiques d'Usage
 
 Basé sur les données disponibles (juillet-août 2025) :[^1]
@@ -1155,28 +1142,21 @@ Basé sur les données disponibles (juillet-août 2025) :[^1]
 | **Téléchargements totaux** | ~2,500+ |
 | **Pic de téléchargements** | 235 le 19 juillet 2025 |
 | **Notebooks publics** | Non spécifié (plusieurs kernels Kaggle disponibles) |
-| **Score/Rating** | 10.00 (évaluation maximale)[^1] |
+| **Score/Rating** | 10.00 (évaluation maximale). |
 
 ### 10.6 Ressources Complémentaires
 
 **Notebooks Kaggle utilisant ce dataset** :
 
-- "Fraud Detection | RF Model | 0.91 Score" par uselessnoob[^14]
-- "Fraud Detection | EDA + 0.9 Recall" par diegoamd[^15]
-- "FraudDetector with IsoForest and DBSCN" par olneyjeffrey[^30]
+- "Fraud Detection | RF Model | 0.91 Score" par uselessnoob.
+- "Fraud Detection | EDA + 0.9 Recall" par diegoamd.
+- "FraudDetector with IsoForest and DBSCN" par olneyjeffrey.
 
 **Datasets similaires pour comparaison** :
 
-- Credit Card Fraud Detection (Kaggle, 284,807 transactions)[^31]
-- PaySim Synthetic Financial Dataset (6.3M transactions)[^32]
-- Nigerian Financial Transactions Dataset (features similaires)[^33]
-
-
-### 10.7 Contact et Support
-
-- **Questions** : Utiliser la section "Comments" sur la page Kaggle du dataset
-- **Problèmes techniques** : Signaler via Kaggle
-- **Demandes de collaboration** : Contacter l'auteur via son profil Kaggle
+- Credit Card Fraud Detection (Kaggle, 284,807 transactions).
+- PaySim Synthetic Financial Dataset (6.3M transactions).
+- Nigerian Financial Transactions Dataset (features similaires).
 
 ***
 
@@ -1340,7 +1320,7 @@ print("\n✅ Analyse terminée! Les visualisations ont été sauvegardées.")
 
 ## CONCLUSION
 
-Ce dataset **Financial Transactions Dataset for Fraud Detection** constitue une ressource précieuse pour développer et tester des systèmes de détection de fraude basés sur le machine learning. Avec **5 millions de transactions synthétiques** réparties sur une année complète, **18 features** incluant des scores comportementaux avancés, et un **ratio de déséquilibre réaliste de 1:27**, il offre un environnement d'entraînement riche et challengeant.[^2][^24][^23][^1]
+Ce dataset **Financial Transactions Dataset for Fraud Detection** constitue une ressource précieuse pour développer et tester des systèmes de détection de fraude basés sur le machine learning. Avec **5 millions de transactions synthétiques** réparties sur une année complète, **18 features** incluant des scores comportementaux avancés, et un **ratio de déséquilibre réaliste de 1:27**, il offre un environnement d'entraînement riche et challengeant.
 
 Les **forces principales** du dataset incluent :
 
@@ -1361,88 +1341,4 @@ Les **limitations** à considérer :
 2. Appliquer **SMOTE ou class weighting** pour gérer le déséquilibre
 3. Cibler **Recall ≥ 80%** comme métrique prioritaire pour minimiser les fraudes manquées
 4. Valider systématiquement sur données réelles avant production
-5. Implémenter un système de **monitoring continu** du concept drift en production[^27][^8]
-
-Ce document servira de référence complète pour toute équipe travaillant avec ce dataset, de l'exploration initiale au déploiement en production d'un système de détection de fraude performant et robuste.
-<span style="display:none">[^34][^35][^36][^37][^38][^39]</span>
-
-<div align="center">⁂</div>
-
-[^1]: https://www.getfocal.ai/blog/fraud-detection-with-machine-learning
-
-[^2]: https://journals.ekb.eg/article_414893_9e92b6e04aa25efa9bcbeef5275ebfc0.pdf
-
-[^3]: https://www.evolutioniq.com/resources/the-journey-begins
-
-[^4]: https://www.reddit.com/r/learnmachinelearning/comments/1g6jx90/trying_to_build_an_effective_fraud_detection/
-
-[^5]: https://keylabs.ai/blog/handling-imbalanced-data-in-classification/
-
-[^6]: https://www.blog.trainindata.com/smote-in-python-a-guide-to-balanced-datasets/
-
-[^7]: https://duckdb.org/2025/08/15/ml-data-preprocessing.html
-
-[^8]: https://www.tookitaki.com/compliance-hub/the-power-of-automated-fraud-detection-systems
-
-[^9]: https://linkurious.com/blog/account-takeover-fraud/
-
-[^10]: https://lantern.splunk.com/Industry_Use_Cases/Financial_Services_and_Insurance/FSI_Fraud_Account_Takeover
-
-[^11]: https://www.syntho.ai/fraud-detection-in-banking-with-synthetic-data/
-
-[^12]: https://www.tandfonline.com/doi/full/10.1080/19393555.2025.2528067?af=R
-
-[^13]: https://thesai.org/Downloads/Volume12No12/Paper_2-New_Feature_Engineering_Framework.pdf
-
-[^14]: https://www.kaggle.com/code/uselessnoob/fraud-detection-rf-model-0-91-score
-
-[^15]: https://www.kaggle.com/code/diegoamd/fraud-detection-eda-0-9-recall
-
-[^16]: https://fiu.gov.gy/wp-content/uploads/2025/10/Typology-Report-Account-Takeovers-Mobile-Payment-Services.pdf
-
-[^17]: https://fedpaymentsimprovement.org/wp-content/uploads/brief-2-fraud-types-and-authentication-for-remote-payment-use-cases.pdf
-
-[^18]: https://www.cesarsotovalero.net/blog/evaluation-metrics-for-real-time-financial-fraud-detection-ml-models.html
-
-[^19]: https://repository.londonmet.ac.uk/6407/2/The final version_feature%20engineering%20framework%20for%20financial%20fraud%20detection%20model.pdf
-
-[^20]: https://xenoss.io/blog/real-time-ai-fraud-detection-in-banking
-
-[^21]: https://openmetal.io/resources/blog/big-data-for-fraud-detection-a-guide-for-financial-services-and-e-commerce/
-
-[^22]: https://docs.nvidia.com/nim/financial-fraud-training/2.0.0/preprocessing/preproc.html
-
-[^23]: https://www.tandfonline.com/doi/full/10.1080/23311975.2025.2474209
-
-[^24]: https://www.academia.edu/129361586/A_Comparative_Study_of_Random_Forest_and_XGBoost_for_Detecting_Credit_Card_Fraud_Transactions_using_Big_Data
-
-[^25]: https://www.linkedin.com/pulse/precision-recall-f1-score-deciphering-success-ai-fraud-stefan-klein-crhfe
-
-[^26]: https://www.tinybird.co/blog/how-to-build-a-real-time-fraud-detection-system
-
-[^27]: http://www.diva-portal.org/smash/get/diva2:1996472/FULLTEXT01.pdf
-
-[^28]: https://kount.com/blog/precision-recall-when-conventional-fraud-metrics-fall-short
-
-[^29]: https://www.kaggle.com/datasets/aryan208/financial-transactions-dataset-for-fraud-detection
-
-[^30]: https://www.kaggle.com/code/olneyjeffrey/frauddetector-with-isoforest-and-dbscn
-
-[^31]: https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
-
-[^32]: https://www.kaggle.com/datasets/ealaxi/paysim1
-
-[^33]: https://huggingface.co/datasets/electricsheepafrica/Nigerian-Financial-Transactions-and-Fraud-Detection-Dataset/viewer
-
-[^34]: https://www.kaggle.com/datasets/aryan208/financial-transactions-dataset-for-fraud-detection/versions/1
-
-[^35]: https://www.kaggle.com/datasets/sriharshaeedala/financial-fraud-detection-dataset
-
-[^36]: https://huggingface.co/datasets/electricsheepafrica/Nigerian-Financial-Transactions-and-Fraud-Detection-Dataset
-
-[^37]: https://www.kaggle.com/datasets/amanalisiddiqui/fraud-detection-dataset
-
-[^38]: https://raw.githubusercontent.com/theislab/scvelo_notebooks/master/DifferentialKinetics.ipynb
-
-[^39]: https://www.kaggle.com/datasets/younusmohamed/fraudulent-financial-transaction-prediction
-
+5. Implémenter un système de **monitoring continu** du concept drift en production.
