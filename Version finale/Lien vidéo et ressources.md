@@ -1,4 +1,4 @@
-Lien de la vidéo. Je n'étais pas en mesure de la télécharger (version gratuite)
+Lien de la vidéo. Je n'étais pas en mesure de la télécharger la totalité car j'etais en version gratuite
 
 Video avec IA
 Premiere partie : [https://lumen5.com/user/ilboudo-wendkounielisee/detection-de-fraude-8dttb/](https://lumen5.com/user/ilboudo-wendkounielisee/detection-de-fraude-8dttb/)
